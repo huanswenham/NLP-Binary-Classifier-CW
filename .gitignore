@@ -1,2 +1,5 @@
 venv/
 __pycache__
+
+# Logs
+deepseek_api_logs/
