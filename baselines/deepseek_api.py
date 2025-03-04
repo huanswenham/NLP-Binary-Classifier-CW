@@ -76,6 +76,3 @@ class DeepSeekApi:
       raise ValueError("Error processing predictions from DeepSeek response.")
 
     return predictions
-
-
-

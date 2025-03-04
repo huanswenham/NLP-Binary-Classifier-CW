@@ -3,3 +3,6 @@ __pycache__
 
 # Logs
 deepseek_api_logs/
+
+# .env
+baselines/.env
