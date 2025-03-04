@@ -5,7 +5,7 @@ MAX_NUM_PARAPHRASES = 6
 
 def main():
     # Get the training dataset
-    train_df = pd.read_csv("../data/train_set.csv")
+    train_df = pd.read_csv("../data/train_set_cleaned.csv")
     train_df = pd.DataFrame(train_df)
 
     # Initialise a new empty dataframe
@@ -15,7 +15,7 @@ def main():
     parrot_paraphraser = ParrotParaphraser()
 
     # Filter and get only the entries that are labeled as PCL
-    pcl_df = train_df[train_df['label'] == 1]
+    pcl_df = train_df[train_df['label'] == 1].reset_index(drop=True)
 
     for index, _ in pcl_df.iterrows():
         original_text = pcl_df.at[index, "text"]
@@ -39,11 +39,13 @@ def main():
     new_df = pd.concat([new_df, non_pcl_df], ignore_index=True)
     
     # Save the new dataframe
-    new_df.to_csv("../data/train_paraphrase_upsampled.csv", index=False, encoding="utf-8")
+    new_df.to_csv("../data/train_set_cleaned_paraphrase_upsampled.csv", index=False, encoding="utf-8")
 
 
 def add_text_entry_to_new_df(sentence, index, old_df, new_df):
+    print("Adding text of index", index)
     entry = old_df.iloc[[index]].copy()
+    print("Entry:", entry)
     entry.at[entry.index[0], 'text'] = sentence
     return pd.concat([new_df, entry], ignore_index=True)
 
